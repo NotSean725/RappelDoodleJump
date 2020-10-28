@@ -9,13 +9,14 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Transform Starting_Level;
     [SerializeField] private List<Transform> LevelPartList;
     [SerializeField] private Transform player;
+    public int secondsToDestroy;
 
     private Vector3 lastEndPosition;
 
     private void Awake()
     {
         lastEndPosition = (Starting_Level.Find("EndPosition").position);
-        int startingSpawnLevelParts = 5;
+        int startingSpawnLevelParts = 2;
         for(int i=0; i<startingSpawnLevelParts; i++)
         {
             SpawnLevelPart();
@@ -36,6 +37,15 @@ public class LevelGenerator : MonoBehaviour
         Transform lastLevelPartTransform = SpawnLevelPart(choseLevelPart, lastEndPosition);
         lastEndPosition = lastLevelPartTransform.Find("EndPosition").position;
     }
+
+    /*private void DespawnLevelPart()
+    {
+        if (Vector3.Distance(player.position, lastEndPosition) > PLAYER_DISTANCE_SPAWN_LEVEL_PART)
+        {
+            DestroyObject;
+        }
+    }*/
+
     private Transform SpawnLevelPart(Transform levelPart, Vector3 spawnPosition)
     {
         Transform levelPartTransform = Instantiate(levelPart, spawnPosition, Quaternion.identity);
