@@ -5,6 +5,9 @@ EditorUserSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 4
   m_ConfigSettings:
+    UnityRemoteDevice:
+      value: 5703075151505a0f5e0d5e7612775a48154e1d7c297d7f697a701b61b3e66460e0b635bfb16b3c64
+      flags: 0
     lightmappingDeviceAndPlatform:
       value: 53
       flags: 0

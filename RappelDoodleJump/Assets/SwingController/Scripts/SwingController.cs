@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class SwingController : MonoBehaviour
 {
@@ -55,15 +56,9 @@ public class SwingController : MonoBehaviour
         // Misc
         lr = GetComponent<LineRenderer>();
     }
+
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
-        rb.AddForce(movement * moveSpeed);
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
@@ -72,8 +67,16 @@ public class SwingController : MonoBehaviour
     }
     private void Update()
     {
+
+        float moveHorizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+        float moveVertical = CrossPlatformInputManager.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+        rb.AddForce(movement * moveSpeed);
+
         // Hold
-        if (Input.GetMouseButton(0))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         { 
             DoSwingAction();
         }
@@ -81,7 +84,7 @@ public class SwingController : MonoBehaviour
         else
         {
             DoFallingAction();
-        }
+        }*/
         // Update rope positions
         lr.SetPosition(0, transform.position);
         lr.SetPosition(1, anchor.transform.position);
@@ -192,5 +195,4 @@ public class SwingController : MonoBehaviour
         }
         return closest;
     }
-
 }
